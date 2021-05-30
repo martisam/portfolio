@@ -56,7 +56,7 @@ scene.background = spaceTexture;
 
 
 //Profile
-const profTexture = new THREE.TextureLoader().load('profile.png');
+const profTexture = new THREE.TextureLoader().load('Profile.png');
 
 const profile = new THREE.Mesh(
   new THREE.BoxGeometry(3,3,3),
