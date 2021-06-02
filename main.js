@@ -19,7 +19,7 @@ renderer.render(scene, camera);
 
 //Creating the Donut/Torus geometry
 const geometry = new THREE.TorusGeometry( 10, 3, 15, 100);
-const material = new THREE.MeshStandardMaterial( { color: 0xFFFFFF});
+const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF, wireframe: true});
 const torus = new THREE.Mesh( geometry, material );
 
 scene.add(torus);
