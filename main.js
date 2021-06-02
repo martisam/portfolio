@@ -1,4 +1,4 @@
-import {OrbitControls} from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/OrbitControls.js';
+
 import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
 
 //setting up background
@@ -19,7 +19,7 @@ renderer.render(scene, camera);
 
 //Creating the Donut/Torus geometry
 const geometry = new THREE.TorusGeometry( 10, 3, 15, 100);
-const material = new THREE.MeshStandardMaterial( { color: 0x29CC29});
+const material = new THREE.MeshStandardMaterial( { color: 0xFFFFFF});
 const torus = new THREE.Mesh( geometry, material );
 
 scene.add(torus);
@@ -30,10 +30,6 @@ pointLight.position.set(5,5,5);
 
 const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(pointLight, ambientLight);
-
-// const lightHelper = new THREE.PointLightHelper(pointLight);
-// const gridHelper = new THREE.GridHelper(200, 50);
-// scene.add(lightHelper, gridHelper);
 
 // const controls = new OrbitControls(camera, renderer.domElement);
 
