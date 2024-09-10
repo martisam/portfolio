@@ -64,11 +64,6 @@ scene.add(profile)
 //Animation Scroll
 function moveCamera() {
 
-  const t = document.body.getBoundingClientRect().top;
-  mars.rotation.x += 0.05;
-  mars.rotation.y += 0.075;
-  mars.rotation.z += 0.05;
-
   profile.rotation.y += 0.01;
   profile.rotation.z += 0.01;
 
@@ -88,7 +83,6 @@ function animate(){
   torus.rotation.y += 0.005;
   torus.rotation.z += 0.01;
 
-  mars.rotation.x += 0.005;
   //controls.update();
   renderer.render( scene, camera);
 }
