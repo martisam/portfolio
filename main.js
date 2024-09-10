@@ -52,7 +52,7 @@ scene.background = spaceTexture;
 
 
 //Profile
-const profTexture = new THREE.TextureLoader().load('Profile.png');
+const profTexture = new THREE.TextureLoader().load('profile.jpg');
 
 const profile = new THREE.Mesh(
   new THREE.BoxGeometry(3,3,3),
@@ -60,24 +60,6 @@ const profile = new THREE.Mesh(
 );
 
 scene.add(profile)
-
-//mars
-const marsTexture = new THREE.TextureLoader().load('mars.jpeg');
-
-const mars = new THREE.Mesh(
-  new THREE.SphereGeometry(3, 32, 32),
-  new THREE.MeshStandardMaterial( {
-    map: marsTexture,
-  })
-);
-
-scene.add(mars);
-
-mars.position.z = 30;
-mars.position.setX(-10);
-
-profile.position.z = -5;
-profile.position.x = 2;
 
 //Animation Scroll
 function moveCamera() {
