@@ -61,9 +61,13 @@ const profile = new THREE.Mesh(
 
 scene.add(profile)
 
+profile.position.x = 2;
+profile.position.z = -5;
+
 //Animation Scroll
 function moveCamera() {
 
+  const t = document.body.getBoundingClientRect().top;
   profile.rotation.y += 0.01;
   profile.rotation.z += 0.01;
 
