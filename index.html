@@ -2,23 +2,96 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="icon.svg"/>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/images/tech.svg"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sam's Website</title>
   </head>
   <body>
-    
-    <canvas id="bg">
+     <!-- Navigation Bar -->
+     <nav>
+      <div class="navbar">
+        <ul>
+          <li><a href="#Home" class="scroll-link">Home</a></li>
+          <li><a href="#aboutMe" class="scroll-link">About Me</a></li>
+          <li><a href="#Resources" class="scroll-link">Resources</a></li>
+          <li><a href="#Social" class="scroll-link">My Social</a></li>
+        </ul>
+        <script>
+          document.querySelectorAll('.scroll-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+              e.preventDefault();
+              document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+              });
+            });
+          });
+        </script>
+      </div>
+    </nav>
 
-    </canvas>
-
-
+  <!-- Main Content -->
+    <canvas id="bg"></canvas>
     <main>
 
-      <header>
+      <header id="Home">
         <h1>Samuel Martinez</h1>
-        <p> 🧑🏽‍💻 Technology Architect</p>
+        <p class="fade">🧑🏽‍💻 Tech Architect</p>
+        <style>
+          .fade {
+            display: inline-block;
+            animation: fadeInOut 5s infinite 5s;
+          }
+
+          @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            20%, 80% { opacity: 1; }
+          }
+
+          .fade span {
+            opacity: 0;
+            animation: fadeLetter 5s infinite 5s;
+          }
+
+          @keyframes fadeLetter {
+            0%, 100% { opacity: 0; }
+            20%, 80% { opacity: 1; }
+          }
+
+          .fade span:nth-child(1) { animation-delay: 0s; }
+          .fade span:nth-child(2) { animation-delay: 0.1s; }
+          .fade span:nth-child(3) { animation-delay: 0.2s; }
+          .fade span:nth-child(4) { animation-delay: 0.3s; }
+          .fade span:nth-child(5) { animation-delay: 0.4s; }
+          .fade span:nth-child(6) { animation-delay: 0.5s; }
+          .fade span:nth-child(7) { animation-delay: 0.6s; }
+          .fade span:nth-child(8) { animation-delay: 0.7s; }
+          .fade span:nth-child(9) { animation-delay: 0.8s; }
+          .fade span:nth-child(10) { animation-delay: 0.9s; }
+          .fade span:nth-child(11) { animation-delay: 1s; }
+          .fade span:nth-child(12) { animation-delay: 1.1s; }
+          .fade span:nth-child(13) { animation-delay: 1.2s; }
+          .fade span:nth-child(14) { animation-delay: 1.3s; }
+          .fade span:nth-child(15) { animation-delay: 1.4s; }
+          .fade span:nth-child(16) { animation-delay: 1.5s; }
+          .fade span:nth-child(17) { animation-delay: 1.6s; }
+          .fade span:nth-child(18) { animation-delay: 1.7s; }
+          .fade span:nth-child(19) { animation-delay: 1.8s; }
+          .fade span:nth-child(20) { animation-delay: 1.9s; }
+          .fade span:nth-child(21) { animation-delay: 2s; }
+        </style>
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            const text = document.querySelector('.fade').textContent;
+            const fadeElement = document.querySelector('.fade');
+            fadeElement.innerHTML = '';
+            text.split('').forEach((char, index) => {
+              const span = document.createElement('span');
+              span.textContent = char;
+              fadeElement.appendChild(span);
+            });
+          });
+        </script>
       </header>
 
 
@@ -26,19 +99,23 @@
         <p>Learning, Developing and Evolving</p>
       </blockquote>
 
-      <section>
+      <section id="aboutMe">
         <h2>📜 About Me</h2>
         <p>
-          Hello World! 🌎
+          Hello World!! 🌎
         </p>
         <p>
-          I'm a Tech Fanatic and a Web3 enthusiast! 💞️ <br>
-          I'm also a traveler ✈️, love to learn from all the diverse cultures this world has to offer us!
+          I'm a Tech Fanatic and a Web3 enthusiast! 💞️ <br><br>
+          As a Technology Architect, I design and oversee the implementation of complex IT systems.
+          My role involves ensuring that the technology infrastructure aligns with the business goals and is scalable, secure, and efficient. 
+          I work closely with stakeholders to understand their needs and translate them into technical solutions, guiding the development team through the architecture process.
+          <br><br>
+          To learn more about me & experience, please visit my LinkedIn. 🚀
         </p>
 
       </section>
 
-      <section class="light">
+      <section class="light" id="Resources">
         <h2>👩🏽‍🚀 Resources</h2>
 
         <p>
@@ -51,7 +128,7 @@
           jQuery, XQuery, AJAX, XML, Raspberry Pi, C++, C# and Java. <br><br>
           <a href="https://www.codecademy.com/" role="button">Codeacademy</a> is an American online interactive platform that offers free coding classes in 12 
           different programming languages including Python, Java, Go, JavaScript, Ruby, SQL, C++, C#, Swift, and Sass, as well as markup languages HTML and CSS. <br><br>
-          Studying by your own is not your way of learning?... Then if you live in the US, I highly suggest you to apply to: <br> <a href="https://www.yearup.org/" role="button">Year Up</a>
+          Studying by your own is not your way of learning?... Then if you live in the US, I highly suggest you to apply to: <br><br> <a href="https://www.yearup.org/" role="button">Year Up United</a>
           a nonprofit organization which mission's is to close the Opportunity Divide by ensuring that young adults gain
           the skills, experiences, and support that will empower them to reach their potential
           through careers and higher education.<br><br>
@@ -61,8 +138,8 @@
 
       </section>
 
-      <section class="left">
-        <h2>📨 Contact Me</h2>
+      <section class="left" id="Social">
+        <h2>🛜 My Social</h2>
 
         <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 
           class="bi bi-linkedin" viewBox="0 0 16 16">
@@ -87,7 +164,7 @@
     </main>
   
    
-    <script type="module" src="./main.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
     
   </body>
 </html>
