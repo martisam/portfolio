@@ -56,7 +56,7 @@ function initScene() {
     return points;
   }
   const starsNear = makeStarLayer(900, 140, 0.65, 0xffffff);
-  const starsFar = makeStarLayer(1400, 240, 0.4, 0xb9a7ff);
+  const starsFar = makeStarLayer(1400, 240, 0.4, 0xffffff);
 
   // ---- Orbiting planet (upper-right margin) ----
   const planet = new THREE.Group();
