@@ -57,13 +57,15 @@ html[data-theme="light"] {
   --surface-nav: rgba(255, 255, 255, 0.7);
 }
 
-/* Light: faint blueprint grid behind the (transparent) canvas */
+/* Light: two-tier blueprint grid (bold major lines + fine minor lines) */
 html[data-theme="light"] body {
   background:
-    linear-gradient(rgba(13, 148, 136, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(13, 148, 136, 0.06) 1px, transparent 1px),
+    linear-gradient(rgba(13, 148, 136, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13, 148, 136, 0.09) 1px, transparent 1px),
+    linear-gradient(rgba(13, 148, 136, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13, 148, 136, 0.045) 1px, transparent 1px),
     var(--bg);
-  background-size: 42px 42px, 42px 42px, auto;
+  background-size: 140px 140px, 140px 140px, 28px 28px, 28px 28px, auto;
 }
 
 /* Light: soft top highlight instead of a darkening vignette */
