@@ -71,7 +71,7 @@ function initScene() {
   );
   const planetRing = new THREE.Mesh(
     new THREE.TorusGeometry(8, 0.35, 16, 120),
-    new THREE.MeshBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.55 })
+    new THREE.MeshBasicMaterial({ color: 0x2ee6c5, transparent: true, opacity: 0.55 })
   );
   planetRing.rotation.x = Math.PI / 2.3;
   planet.add(planetBody, planetRing);
@@ -83,40 +83,38 @@ function initScene() {
   // schematic meets technology. Crosses left -> right on a loop, nose-first.
   function makeShip() {
     const ship = new THREE.Group();
-    // Metallic hull (lit + slight emissive so it reads against deep space)
-    const hull = new THREE.MeshStandardMaterial({
-      color: 0xaebccf, metalness: 0.8, roughness: 0.3,
-      emissive: 0x0a2b3a, emissiveIntensity: 0.6,
-    });
-    const accent = new THREE.MeshBasicMaterial({ color: 0x22d3ee }); // glowing cyan
-    const glowMat = new THREE.MeshBasicMaterial({ color: 0x9bf6ff });
+    // Blueprint look: crisp green-cyan edge lines over a faint translucent hull.
+    const edgeMat = new THREE.LineBasicMaterial({ color: 0x2ee6c5, transparent: true, opacity: 0.9 });
+    const hullMat = new THREE.MeshBasicMaterial({ color: 0x06141c, transparent: true, opacity: 0.5 });
 
-    // Fuselage along +x
-    const body = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.7, 3, 18), hull);
-    body.rotation.z = -Math.PI / 2;
-    ship.add(body);
+    // Add a part as faint hull + bright wireframe edges, sharing one transform.
+    function part(geo, t) {
+      t = t || {};
+      const fill = new THREE.Mesh(geo, hullMat);
+      const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo), edgeMat);
+      [fill, edges].forEach((o) => {
+        o.rotation.set(t.rx || 0, t.ry || 0, t.rz || 0);
+        o.position.set(t.x || 0, t.y || 0, t.z || 0);
+      });
+      ship.add(fill, edges);
+    }
 
-    // Nose cone (leads the +x direction)
-    const nose = new THREE.Mesh(new THREE.ConeGeometry(0.45, 1.5, 18), hull);
-    nose.rotation.z = -Math.PI / 2;
-    nose.position.x = 2.2;
-    ship.add(nose);
+    part(new THREE.CylinderGeometry(0.45, 0.7, 3, 14), { rz: -Math.PI / 2 });        // fuselage
+    part(new THREE.ConeGeometry(0.5, 1.6, 14), { rz: -Math.PI / 2, x: 2.2 });        // nose
+    part(new THREE.BoxGeometry(1.7, 0.12, 3), { x: -0.3 });                           // wings
+    part(new THREE.BoxGeometry(1, 0.9, 0.12), { x: -1.3, y: 0.5 });                   // dorsal fin
 
-    // Swept wing plate + dorsal fin
-    const wings = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.12, 3), hull);
-    wings.position.x = -0.3;
-    ship.add(wings);
-    const fin = new THREE.Mesh(new THREE.BoxGeometry(1, 0.9, 0.12), hull);
-    fin.position.set(-1.3, 0.5, 0);
-    ship.add(fin);
-
-    // Cyan cockpit + cyan engine glow (architecture-schematic accents)
-    const canopy = new THREE.Mesh(new THREE.SphereGeometry(0.32, 16, 16), accent);
-    canopy.position.set(0.5, 0.32, 0);
-    ship.add(canopy);
-    const glow = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), glowMat);
-    glow.position.x = -1.8;
-    ship.add(glow);
+    // Red engine: bright core + soft halo at the tail (-x)
+    const engine = new THREE.Mesh(
+      new THREE.SphereGeometry(0.42, 16, 16),
+      new THREE.MeshBasicMaterial({ color: 0xff3b30 })
+    );
+    const halo = new THREE.Mesh(
+      new THREE.SphereGeometry(0.78, 16, 16),
+      new THREE.MeshBasicMaterial({ color: 0xff5a3c, transparent: true, opacity: 0.35 })
+    );
+    engine.position.x = halo.position.x = -1.95;
+    ship.add(engine, halo);
 
     ship.scale.setScalar(2);
     return ship;
@@ -124,7 +122,7 @@ function initScene() {
   const ship = makeShip();
   scene.add(ship);
 
-  const SHIP = { startX: -75, endX: 75, y: 15, z: -10, cycle: 19 }; // seconds per crossing
+  const SHIP = { startX: -75, endX: 75, y: 14, z: -9, cycle: 19 }; // seconds per crossing
 
   // ---- Scroll parallax ----
   let scrollY = window.scrollY;

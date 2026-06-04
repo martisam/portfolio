@@ -1,7 +1,7 @@
 /* ============================================================
    Samuel Martinez - Portfolio
    Space theme
-   Palette: deep space navy-black, cyan primary, ice-blue secondary
+   Palette: deep space navy-black, green-cyan (turquoise) primary, mint secondary
    ============================================================ */
 
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500;600&display=swap");
@@ -18,10 +18,10 @@
   --text: #e7ecf7;
   --text-dim: #93a0bd;
 
-  /* accents - deep space cyan / ice blue */
-  --accent: #22d3ee;        /* primary cyan glow */
-  --accent-soft: rgba(34, 211, 238, 0.18);
-  --cyan: #7dd3fc;          /* ice-blue secondary */
+  /* accents - green-cyan (turquoise) / mint */
+  --accent: #2ee6c5;        /* primary turquoise glow */
+  --accent-soft: rgba(46, 230, 197, 0.18);
+  --cyan: #8ef0d8;          /* mint secondary */
 
   /* type */
   --font-head: "Plus Jakarta Sans", system-ui, sans-serif;
@@ -65,8 +65,8 @@ body.no-webgl #bg {
 
 body.no-webgl {
   background:
-    radial-gradient(circle at 75% 18%, rgba(34, 211, 238, 0.28), transparent 45%),
-    radial-gradient(circle at 20% 80%, rgba(34, 211, 238, 0.16), transparent 40%),
+    radial-gradient(circle at 75% 18%, rgba(46, 230, 197, 0.28), transparent 45%),
+    radial-gradient(circle at 20% 80%, rgba(46, 230, 197, 0.16), transparent 40%),
     var(--bg);
 }
 
@@ -95,7 +95,7 @@ h1 {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0 0 60px rgba(34, 211, 238, 0.25);
+  text-shadow: 0 0 60px rgba(46, 230, 197, 0.25);
 }
 
 h2 {
@@ -220,10 +220,10 @@ section,
   height: 220px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid rgba(34, 211, 238, 0.6);
+  border: 2px solid rgba(46, 230, 197, 0.6);
   box-shadow:
-    0 0 0 6px rgba(34, 211, 238, 0.08),
-    0 0 40px rgba(34, 211, 238, 0.35);
+    0 0 0 6px rgba(46, 230, 197, 0.08),
+    0 0 40px rgba(46, 230, 197, 0.35);
 }
 
 .eyebrow {
@@ -278,13 +278,13 @@ section,
 .btn-primary {
   background: var(--accent);
   color: #04060f;
-  box-shadow: 0 0 24px rgba(34, 211, 238, 0.45);
+  box-shadow: 0 0 24px rgba(46, 230, 197, 0.45);
 }
 
 .btn-primary:hover {
   color: #04060f;
   transform: translateY(-2px);
-  box-shadow: 0 0 36px rgba(34, 211, 238, 0.7);
+  box-shadow: 0 0 36px rgba(46, 230, 197, 0.7);
 }
 
 .btn-ghost {
@@ -320,7 +320,7 @@ section,
 .card:hover {
   transform: translateY(-4px);
   border-color: var(--accent);
-  box-shadow: 0 0 30px rgba(34, 211, 238, 0.25);
+  box-shadow: 0 0 30px rgba(46, 230, 197, 0.25);
 }
 
 .card p {
@@ -342,8 +342,8 @@ section,
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--cyan);
-  background: rgba(34, 211, 238, 0.1);
-  border: 1px solid rgba(34, 211, 238, 0.25);
+  background: rgba(46, 230, 197, 0.1);
+  border: 1px solid rgba(46, 230, 197, 0.25);
   padding: 0.25rem 0.7rem;
   border-radius: 999px;
 }
