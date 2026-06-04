@@ -78,6 +78,54 @@ function initScene() {
   planet.position.set(-45, 5, -9);
   scene.add(planet);
 
+  // ---- Spaceship: a holographic "blueprint" cruiser ----
+  // Dark faceted hull wrapped in glowing cyan wireframe = architecture
+  // schematic meets technology. Crosses left -> right on a loop, nose-first.
+  function makeShip() {
+    const ship = new THREE.Group();
+    // Metallic hull (lit + slight emissive so it reads against deep space)
+    const hull = new THREE.MeshStandardMaterial({
+      color: 0xaebccf, metalness: 0.8, roughness: 0.3,
+      emissive: 0x0a2b3a, emissiveIntensity: 0.6,
+    });
+    const accent = new THREE.MeshBasicMaterial({ color: 0x22d3ee }); // glowing cyan
+    const glowMat = new THREE.MeshBasicMaterial({ color: 0x9bf6ff });
+
+    // Fuselage along +x
+    const body = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.7, 3, 18), hull);
+    body.rotation.z = -Math.PI / 2;
+    ship.add(body);
+
+    // Nose cone (leads the +x direction)
+    const nose = new THREE.Mesh(new THREE.ConeGeometry(0.45, 1.5, 18), hull);
+    nose.rotation.z = -Math.PI / 2;
+    nose.position.x = 2.2;
+    ship.add(nose);
+
+    // Swept wing plate + dorsal fin
+    const wings = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.12, 3), hull);
+    wings.position.x = -0.3;
+    ship.add(wings);
+    const fin = new THREE.Mesh(new THREE.BoxGeometry(1, 0.9, 0.12), hull);
+    fin.position.set(-1.3, 0.5, 0);
+    ship.add(fin);
+
+    // Cyan cockpit + cyan engine glow (architecture-schematic accents)
+    const canopy = new THREE.Mesh(new THREE.SphereGeometry(0.32, 16, 16), accent);
+    canopy.position.set(0.5, 0.32, 0);
+    ship.add(canopy);
+    const glow = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), glowMat);
+    glow.position.x = -1.8;
+    ship.add(glow);
+
+    ship.scale.setScalar(2);
+    return ship;
+  }
+  const ship = makeShip();
+  scene.add(ship);
+
+  const SHIP = { startX: -75, endX: 75, y: 15, z: -10, cycle: 19 }; // seconds per crossing
+
   // ---- Scroll parallax ----
   let scrollY = window.scrollY;
   window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
@@ -101,6 +149,14 @@ function initScene() {
     starsNear.position.y = scrollY * 0.004;
     starsFar.rotation.y = elapsed * 0.004;
     starsFar.position.y = scrollY * 0.0015;
+
+    // spaceship crossing: left -> right, then loops
+    const t = (elapsed % SHIP.cycle) / SHIP.cycle;
+    ship.position.x = SHIP.startX + (SHIP.endX - SHIP.startX) * t;
+    ship.position.y = SHIP.y + Math.sin(elapsed * 0.9) * 0.7 - scrollY * 0.012;
+    ship.position.z = SHIP.z;
+    ship.rotation.z = -0.12;            // slight bank
+    ship.rotation.y = Math.sin(elapsed * 0.5) * 0.06;
 
     renderer.render(scene, camera);
   }

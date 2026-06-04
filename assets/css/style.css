@@ -188,6 +188,16 @@ section,
   margin-top: -0.25rem;
 }
 
+/* Glass panel for the About section */
+#about {
+  background: var(--panel);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem 2rem;
+}
+
 /* ---------- Hero ---------- */
 .hero {
   padding-top: 3rem;

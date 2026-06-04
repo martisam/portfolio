@@ -42,5 +42,5 @@ Work flows up the chain - never commit directly to `main`.
 
 ## Links
 
-- LinkedIn: [Samuel Martinez Hernandez](https://www.linkedin.com/in/samuel-martinez-hernandez-377ab11a6/)
+- LinkedIn: [Samuel Martinez Hernandez](https://www.linkedin.com/in/samuel-mart%C3%ADnez-hern%C3%A1ndez-377ab11a6/)
 - GitHub: [martisam](https://github.com/martisam)
