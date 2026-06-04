@@ -79,8 +79,8 @@ function initScene() {
     return points;
   }
   // sizes are now in screen pixels (attenuation off)
-  const starsNear = makeStarLayer(900, 140, 2.4, 0xffffff);
-  const starsFar = makeStarLayer(1400, 240, 1.4, 0xffffff);
+  const starsNear = makeStarLayer(900, 140, 3.6, 0xffffff);
+  const starsFar = makeStarLayer(1400, 240, 2.2, 0xffffff);
 
   // ---- Orbiting planet (upper-right margin) ----
   const planet = new THREE.Group();
