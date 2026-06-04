@@ -4,6 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Set theme before first paint to avoid a flash (system pref unless saved) -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var sysLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+          document.documentElement.setAttribute('data-theme', saved || (sysLight ? 'light' : 'dark'));
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+
     <!-- Primary meta -->
     <title>Samuel Martinez | Technology Architect</title>
     <meta name="description" content="Samuel Martinez - Technology Architect designing scalable, secure cloud and enterprise solutions. Web3 enthusiast and agentic AI builder." />
@@ -43,6 +56,7 @@
           <li><a href="#skills" class="scroll-link">Skills</a></li>
           <li><a href="#contact" class="scroll-link">Contact</a></li>
         </ul>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">☀️</button>
       </div>
     </nav>
 

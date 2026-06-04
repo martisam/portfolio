@@ -10,6 +10,28 @@
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // ---- Theme toggle (initial value already set by inline head script) ----
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+
+  function reflectTheme(theme) {
+    if (!toggle) return;
+    // Show the action: in dark mode offer the sun, in light mode the moon.
+    toggle.textContent = theme === 'light' ? '🌙' : '☀️';
+    toggle.setAttribute('aria-pressed', String(theme === 'light'));
+  }
+
+  if (toggle) {
+    reflectTheme(root.getAttribute('data-theme'));
+    toggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) { /* ignore */ }
+      reflectTheme(next);
+      window.dispatchEvent(new CustomEvent('themechange', { detail: next }));
+    });
+  }
+
   // ---- Footer year ----
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();

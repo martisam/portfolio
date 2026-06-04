@@ -105,10 +105,13 @@ function initScene() {
   // ---- Spaceship: a holographic "blueprint" cruiser ----
   // Dark faceted hull wrapped in glowing cyan wireframe = architecture
   // schematic meets technology. Crosses left -> right on a loop, nose-first.
+  // Shared so the theme switcher can recolor the ship's blueprint lines.
+  const shipEdgeMat = new THREE.LineBasicMaterial({ color: 0x2ee6c5, transparent: true, opacity: 0.9 });
+
   function makeShip() {
     const ship = new THREE.Group();
-    // Blueprint look: crisp green-cyan edge lines over a faint translucent hull.
-    const edgeMat = new THREE.LineBasicMaterial({ color: 0x2ee6c5, transparent: true, opacity: 0.9 });
+    // Blueprint look: crisp edge lines over a faint translucent hull.
+    const edgeMat = shipEdgeMat;
     const hullMat = new THREE.MeshBasicMaterial({ color: 0x06141c, transparent: true, opacity: 0.5 });
 
     // Add a part as faint hull + bright wireframe edges, sharing one transform.
@@ -147,6 +150,20 @@ function initScene() {
   scene.add(ship);
 
   const SHIP = { startX: -75, endX: 75, y: 14, z: -9, cycle: 19 }; // seconds per crossing
+
+  // ---- Theme-aware colors (dark glow vs light blueprint-ink) ----
+  const SCENE_THEME = {
+    dark:  { star: 0xffffff, ship: 0x2ee6c5, ring: 0x2ee6c5 },
+    light: { star: 0x0e6b78, ship: 0x0c6b61, ring: 0x0d9488 },
+  };
+  function applySceneTheme(name) {
+    const c = SCENE_THEME[name] || SCENE_THEME.dark;
+    starsNear.material.color.set(c.star);
+    starsFar.material.color.set(c.star);
+    shipEdgeMat.color.set(c.ship);
+    planetRing.material.color.set(c.ring);
+  }
+  applySceneTheme(document.documentElement.getAttribute('data-theme') || 'dark');
 
   // ---- Scroll parallax ----
   let scrollY = window.scrollY;
@@ -187,8 +204,12 @@ function initScene() {
     // Accessible: draw one static frame, no animation loop.
     renderFrame(0);
     window.addEventListener('scroll', () => renderFrame(0), { passive: true });
+    window.addEventListener('themechange', (e) => { applySceneTheme(e.detail); renderFrame(0); });
     return;
   }
+
+  // Live recolor when the user toggles the theme
+  window.addEventListener('themechange', (e) => applySceneTheme(e.detail));
 
   const clock = new THREE.Clock();
   let running = true;
