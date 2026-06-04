@@ -153,8 +153,8 @@ function initScene() {
 
   // ---- Theme-aware colors (dark glow vs light blueprint-ink) ----
   const SCENE_THEME = {
-    dark:  { star: 0xffffff, ship: 0x2ee6c5, ring: 0x2ee6c5 },
-    light: { star: 0x0e6b78, ship: 0x0c6b61, ring: 0x0d9488 },
+    dark:  { star: 0xffffff, ship: 0x2ee6c5, ring: 0x2ee6c5, planet: 0x1e6fb0, planetEmissive: 0x06243f },
+    light: { star: 0x0e6b78, ship: 0x0c6b61, ring: 0x0d9488, planet: 0x119b8c, planetEmissive: 0x0a3b35 },
   };
   function applySceneTheme(name) {
     const c = SCENE_THEME[name] || SCENE_THEME.dark;
@@ -162,6 +162,8 @@ function initScene() {
     starsFar.material.color.set(c.star);
     shipEdgeMat.color.set(c.ship);
     planetRing.material.color.set(c.ring);
+    planetBody.material.color.set(c.planet);
+    planetBody.material.emissive.set(c.planetEmissive);
   }
   applySceneTheme(document.documentElement.getAttribute('data-theme') || 'dark');
 
