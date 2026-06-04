@@ -1,27 +1,27 @@
 /* ============================================================
    Samuel Martinez - Portfolio
-   Section 3: Space theme
-   Palette: deep space black, Accenture violet accent, cyan glow
+   Space theme
+   Palette: deep space navy-black, cyan primary, ice-blue secondary
    ============================================================ */
 
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500;600&display=swap");
 
 :root {
   /* surfaces */
-  --bg: #05060a;
-  --panel: rgba(17, 19, 32, 0.62);
-  --panel-solid: #0d0f1a;
+  --bg: #04060f;
+  --panel: rgba(14, 22, 38, 0.62);
+  --panel-solid: #0a1120;
   --border: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.16);
 
   /* text */
-  --text: #e7e9f2;
-  --text-dim: #99a1bd;
+  --text: #e7ecf7;
+  --text-dim: #93a0bd;
 
-  /* accents */
-  --accent: #a100ff;        /* Accenture violet */
-  --accent-soft: rgba(161, 0, 255, 0.18);
-  --cyan: #22d3ee;          /* secondary glow */
+  /* accents - deep space cyan / ice blue */
+  --accent: #22d3ee;        /* primary cyan glow */
+  --accent-soft: rgba(34, 211, 238, 0.18);
+  --cyan: #7dd3fc;          /* ice-blue secondary */
 
   /* type */
   --font-head: "Plus Jakarta Sans", system-ui, sans-serif;
@@ -58,6 +58,18 @@ body {
   z-index: -1;
 }
 
+/* WebGL unsupported: hide canvas, show a static space gradient */
+body.no-webgl #bg {
+  display: none;
+}
+
+body.no-webgl {
+  background:
+    radial-gradient(circle at 75% 18%, rgba(34, 211, 238, 0.28), transparent 45%),
+    radial-gradient(circle at 20% 80%, rgba(34, 211, 238, 0.16), transparent 40%),
+    var(--bg);
+}
+
 /* radial vignette to deepen the space feel over the canvas */
 body::after {
   content: "";
@@ -65,7 +77,7 @@ body::after {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: radial-gradient(ellipse at 50% 0%, transparent 45%, rgba(5, 6, 10, 0.85) 100%);
+  background: radial-gradient(ellipse at 50% 30%, transparent 60%, rgba(4, 6, 15, 0.6) 100%);
 }
 
 /* ---------- Typography ---------- */
@@ -83,7 +95,7 @@ h1 {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0 0 60px rgba(161, 0, 255, 0.25);
+  text-shadow: 0 0 60px rgba(34, 211, 238, 0.25);
 }
 
 h2 {
@@ -179,6 +191,29 @@ section,
 /* ---------- Hero ---------- */
 .hero {
   padding-top: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+}
+
+.hero-text {
+  flex: 1 1 auto;
+}
+
+.hero-photo {
+  flex: 0 0 auto;
+}
+
+.hero-photo img {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(34, 211, 238, 0.6);
+  box-shadow:
+    0 0 0 6px rgba(34, 211, 238, 0.08),
+    0 0 40px rgba(34, 211, 238, 0.35);
 }
 
 .eyebrow {
@@ -201,9 +236,15 @@ section,
 
 .value-prop {
   max-width: 38rem;
-  color: var(--text-dim);
+  color: var(--text);
   font-size: 1.1rem;
   margin: 0 0 2rem;
+  padding: 0.9rem 1.1rem;
+  background: rgba(4, 6, 15, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
 /* ---------- Buttons ---------- */
@@ -226,14 +267,14 @@ section,
 
 .btn-primary {
   background: var(--accent);
-  color: #fff;
-  box-shadow: 0 0 24px rgba(161, 0, 255, 0.45);
+  color: #04060f;
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.45);
 }
 
 .btn-primary:hover {
-  color: #fff;
+  color: #04060f;
   transform: translateY(-2px);
-  box-shadow: 0 0 36px rgba(161, 0, 255, 0.7);
+  box-shadow: 0 0 36px rgba(34, 211, 238, 0.7);
 }
 
 .btn-ghost {
@@ -269,7 +310,7 @@ section,
 .card:hover {
   transform: translateY(-4px);
   border-color: var(--accent);
-  box-shadow: 0 0 30px rgba(161, 0, 255, 0.25);
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.25);
 }
 
 .card p {
@@ -390,6 +431,19 @@ blockquote p {
 }
 
 /* ---------- Responsive ---------- */
+@media (max-width: 700px) {
+  .hero {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .hero-photo img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
 @media (max-width: 600px) {
   main {
     padding: 6rem 1.1rem 3rem;
