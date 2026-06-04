@@ -43,6 +43,21 @@ function initScene() {
   scene.add(pointLight, new THREE.AmbientLight(0x6699ff, 0.45));
 
   // ---- Two-layer starfield (parallax depth) ----
+  // Round sprite so points are soft dots, never square; size is fixed
+  // (no attenuation) so a star drifting near the camera can't blow up.
+  const starTexture = (() => {
+    const c = document.createElement('canvas');
+    c.width = c.height = 64;
+    const g = c.getContext('2d');
+    const grad = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grad.addColorStop(0, 'rgba(255,255,255,1)');
+    grad.addColorStop(0.35, 'rgba(255,255,255,0.7)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = grad;
+    g.fillRect(0, 0, 64, 64);
+    return new THREE.CanvasTexture(c);
+  })();
+
   function makeStarLayer(count, spread, size, color) {
     const geo = new THREE.BufferGeometry();
     const positions = new Float32Array(count * 3);
@@ -50,13 +65,22 @@ function initScene() {
       positions[i] = THREE.MathUtils.randFloatSpread(spread);
     }
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    const mat = new THREE.PointsMaterial({ color, size, sizeAttenuation: true, transparent: true, opacity: 0.9 });
+    const mat = new THREE.PointsMaterial({
+      color,
+      size,
+      map: starTexture,
+      sizeAttenuation: false,
+      transparent: true,
+      opacity: 0.95,
+      depthWrite: false,
+    });
     const points = new THREE.Points(geo, mat);
     scene.add(points);
     return points;
   }
-  const starsNear = makeStarLayer(900, 140, 0.65, 0xffffff);
-  const starsFar = makeStarLayer(1400, 240, 0.4, 0xffffff);
+  // sizes are now in screen pixels (attenuation off)
+  const starsNear = makeStarLayer(900, 140, 2.4, 0xffffff);
+  const starsFar = makeStarLayer(1400, 240, 1.4, 0xffffff);
 
   // ---- Orbiting planet (upper-right margin) ----
   const planet = new THREE.Group();
